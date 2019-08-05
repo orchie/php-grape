@@ -1,45 +1,56 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>GrapesJS Preset Webpage</title>
-    <link href="./css/grapes.min.css" rel="stylesheet">
-    <link href="./dist/grapesjs-preset-webpage.min.css" rel="stylesheet">
-    <script src="./js/filestack-0.1.10.js"></script>
-    <script src="./js/grapes.min.js"></script>
-    <script src="./dist/grapesjs-preset-webpage.min.js"></script>
-    <style>
-      body,
-      html {
-        height: 100%;
-        margin: 0;
+
+<head>
+  <meta charset="utf-8">
+  <title>GrapesJS Preset Webpage</title>
+  <link href="./css/grapes.min.css" rel="stylesheet">
+  <link href="./dist/grapesjs-preset-webpage.min.css" rel="stylesheet">
+  <script src="./js/filestack-0.1.10.js"></script>
+  <script src="./js/grapes.min.js"></script>
+  <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+  <script src="./dist/grapesjs-preset-webpage.min.js"></script>
+  <style>
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="gjs" style="height:0px; overflow:hidden">
+  </div>
+  <script type="text/javascript">
+    let uploadapi = "./api.php?action=upload";
+    let saveapi = "./api.php?action=save";
+    let loadapi = "./api.php?action=load";
+    var editor = grapesjs.init({
+      assetManager: {
+        upload: uploadapi,
+      },
+      storageManager: {
+        type:"remote",
+        autosave: false,
+        urlStore:saveapi,
+        urlLoad:loadapi,
+      },
+      height: '100%',
+      showOffsets: 1,
+      noticeOnUnload: 0,
+      container: '#gjs',
+      fromElement: true,
+
+      plugins: ['gjs-preset-webpage'],
+      pluginsOpts: {
+        'gjs-preset-webpage': {}
       }
-    </style>
-  </head>
-  <body>
+    });
+    editor.StorageManager.saveapi = saveapi;
+    editor.StorageManager.loadapi = loadapi;
+  </script>
+</body>
 
-    <div id="gjs" style="height:0px; overflow:hidden">
-    </div>
-
-
-    <script type="text/javascript">
-      var editor = grapesjs.init({
-        assetManager:{
-          upload:"./api.php?action=upload",
-          
-        },
-        height: '100%',
-        showOffsets: 1,
-        noticeOnUnload: 0,
-        storageManager: { autoload: 0 },
-        container: '#gjs',
-        fromElement: true,
-
-        plugins: ['gjs-preset-webpage'],
-        pluginsOpts: {
-          'gjs-preset-webpage': {}
-        }
-      });
-    </script>
-  </body>
 </html>
